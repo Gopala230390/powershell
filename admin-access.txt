@@ -1,0 +1,13 @@
+
+$computername = "hostname"
+
+Invoke-WmiMethod -ComputerName $computerName -Path win32_process -Name create -ArgumentList "powershell.exe -command Enable-PSRemoting -SkipNetworkProfileCheck -Force"
+Invoke-WmiMethod -ComputerName $computerName -Path win32_process -Name create -ArgumentList "powershell.exe -command WinRM QuickConfig -Quiet"
+
+Enter-PSSession -ComputerName $computername
+
+Add-LocalGroupMember -Group "Users" -Member "username"
+
+Get-ChildItem -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall, HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall | Get-ItemProperty | Where-Object {$_.DisplayName -match "CyberArk Endpoint*" } | Select-Object -Property DisplayName, UninstallString
+
+Exit-PSSession
