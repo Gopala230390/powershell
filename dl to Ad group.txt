@@ -1,0 +1,9 @@
+﻿$DL = Get-DistributionGroup "CoreSuite_CoE_Integration_All"
+$Members = Get-DistributionGroupMember $DL | Select-Object -ExpandProperty PrimarySMTPAddress
+$ADGroup = Get-ADGroup "Alis-wiki-users"
+
+foreach ($Member in $Members)
+{
+  $User = Get-ADUser -Filter "EmailAddress -eq '$Member'" -Properties EmailAddress
+  Add-ADGroupMember -Identity $ADGroup -Members $User
+}

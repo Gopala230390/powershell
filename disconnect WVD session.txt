@@ -1,0 +1,12 @@
+$CurResGroup = "EUA_IDIT_GPF_WVD-RG"
+$CurPool = "EUA_Idit_GPF_Pool01_WVD"
+$SessHost = "EUARD-IDGPF-84"
+$CurSessID = "15"
+Disconnect-AzWvdUserSession -ResourceGroupName $CurResGroup -HostPoolName $CurPool -SessionHostName $SessHost -Id $CurSessID
+
+
+
+
+//Restart-Computer -ComputerName "EUARD-IDGPF-84" -Force
+
+https://techgenix.com/logging-off-and-removing-wvd-user-sessions/

@@ -1,0 +1,1 @@
+https://www.scriptinglibrary.com/languages/powershell/how-to-query-and-log-off-remote-desktop-sessions-with-powershell/

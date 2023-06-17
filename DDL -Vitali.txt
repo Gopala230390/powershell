@@ -1,0 +1,24 @@
+﻿#setting the object identity to value $group_name
+$group_name = "AllDivisionProperty&CasualtyDynamic@sapiens365.onmicrosoft.com"
+#setting the requested filters for the DDL 
+$filter = 'CustomAttribute11 -eq "Active" -and `
+           CustomAttribute13 -eq "IN" -and `
+           Company -eq "Property&Casualty"'
+#setting the filters for the requested group ($group_name) with the requested filter ($filter)
+Set-DynamicDistributionGroup -Identity $group_name -RecipientFilter $filter
+
+$exchangeSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri "https://outlook.office365.com/powershell-liveid" -Credential $Usercredential -Authentication "Basic" -AllowRedirection
+Import-PSSession $exchangeSession -DisableNameChecking
+
+connect-exchnagheonline
+
+$members = Get-DynamicDistributionGroup -Identity “All Division Property&Casualty”
+(Get-Recipient -RecipientPreviewFilter $members.RecipientFilter -resultsize unlimited).count
+
+
+$fte = Get-DynamicDistributionGroup -Identity $group_name
+#setting $fte_filter to get the defualt filter of the requested object 
+$fte_filter = $fte.RecipientFilter 
+#gets the recipients and prints them into an csv file
+Get-Recipient -RecipientPreviewFilter $fte_filter -resultsize unlimited |
+Out-File -FilePath C:\Temp\ote.csv

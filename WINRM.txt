@@ -1,0 +1,28 @@
+.\psexec.exe \EUARD-IT-30 -h -s powershell.exe Enable-PSRemoting -force
+
+
+$SessionArgs = @{
+     ComputerName  = 'INLT1521'
+     Credential    = Get-Credential
+     SessionOption = New-CimSessionOption -Protocol Dcom
+ }
+ $MethodArgs = @{
+     ClassName     = 'Win32_Process'
+     MethodName    = 'Create'
+     CimSession    = New-CimSession @SessionArgs
+     Arguments     = @{
+         CommandLine = "powershell Start-Process powershell -ArgumentList 'Enable-PSRemoting -Force'"
+     }
+ }
+ Invoke-CimMethod @MethodArgs
+
+
+
+
+Get-WmiObject Win32_Product -ComputerName INLT1521 | select Name,Version
+
+
+
+
+
+

@@ -1,0 +1,1 @@
+Get-DistributionGroup -ResultSize Unlimited | Where-Object { (Get-DistributionGroupMember $_ | Where-Object {$_.PrimarySmtpAddress -eq "Nati.Gilboa@sapiens.com"}).Count -gt 0 } | Select-Object Name,PrimarySmtpAddress

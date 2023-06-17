@@ -1,0 +1,11 @@
+
+Set-ExecutionPolicy RemoteSigned
+
+$Credential=Get-Credential
+
+
+$exchangeSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri "https://outlook.office365.com/powershell-liveid" -Credential $Usercredential -Authentication "Basic" -AllowRedirection
+Import-PSSession $exchangeSession -DisableNameChecking
+
+
+Import-CSV c:\name.csv | ForEach {Add-DistributionGroupMember -Identity "ITSM@sapiens.com" -Member $_.Name}

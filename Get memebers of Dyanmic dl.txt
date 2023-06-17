@@ -1,0 +1,2 @@
+$FTE = Get-DynamicDistributionGroup "ALL_P-C_INDIA@sapiens365.onmicrosoft.com"
+Get-Recipient -RecipientPreviewFilter $FTE.RecipientFilter -OrganizationalUnit $FTE.RecipientContainer

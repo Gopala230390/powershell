@@ -1,0 +1,17 @@
+$ServiceName = Read-host 'Enter Service Name here'
+$arrService = Get-Service -Name $ServiceName
+$computerName = $env:COMPUTERNAME
+$subject = "Service '$ServiceName' On The Computer '$computerName' is NOT Running"
+$body = "Restart the service, if service is not starting then raise GSD ticket with priority 1 to Team SERVICENOW"
+
+if ($arrService.Status -ne 'Running')
+{
+Send-MailMessage -From 'administrator@sitech.com' -To 'swapnil@sitech.com' -Subject $subject -body $body -SmtpServer 'mum-srv01.sitech.com'
+(Get-Date).toString("yyyy/MM/dd HH:mm:ss") | Out-File -FilePath C:\Scripts\TestLog.txt –Append
+ Get-Service -Name $ServiceName | Out-File -FilePath C:\Scripts\TestLog.txt –Append
+}
+else
+{
+(Get-Date).toString("yyyy/MM/dd HH:mm:ss") | Out-File -FilePath C:\Scripts\TestLog.txt –Append
+ Get-Service -Name $ServiceName | Out-File -FilePath C:\Scripts\TestLog.txt –Append
+}

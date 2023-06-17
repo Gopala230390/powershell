@@ -1,0 +1,6 @@
+
+enable-psremoting -force
+
+winrm quickconfig (to  config)
+
+https://www.pcwdld.com/winrm-quickconfig-remotely-configure-and-enable#wbounce-modal

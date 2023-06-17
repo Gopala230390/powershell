@@ -1,0 +1,2 @@
+ $FTE = Get-DynamicDistributionGroup "All_P-C_INDIA@sapiens365.onmicrosoft.com"; Get-Recipient -RecipientPreviewFilter $FTE.RecipientFilter -OrganizationalUnit $FTE.RecipientContainer |
+ Export-Csv "C:\Temp\groupmembers2.csv"

@@ -1,0 +1,7 @@
+﻿
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+# Close and re-open your PowerShell window when done
+Install-Module -Name PowerShellGet -Force
+# Add -Force to it when you need to update EXO V1.
+Install-Module -Name ExchangeOnlineManagement -Force
+Connect-ExchangeOnline

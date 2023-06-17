@@ -1,0 +1,5 @@
+﻿$Servers = Get-content "C:\temp\raj.txt"
+Foreach ($Server in $Servers){
+Invoke-Command -ComputerName $Server -ScriptBlock {
+(Get-Package -Name "Forticlien*" | Uninstall-Package -ErrorAction SilentlyContinue)  
+}}

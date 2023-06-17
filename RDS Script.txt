@@ -1,0 +1,23 @@
+$query = "HLRD-Alsa*"   # the query of the VM names
+$cluster = "hlhv-rdgoldcl.sapiens.int"   # the cluster name
+
+
+$nodes = FailoverClusters\Get-ClusterNode -Cluster $cluster
+$vms = @()
+
+foreach ($node in $Nodes ) {
+
+   $node_name =  $node.Name
+
+   "Searching in Host: " + $node_name
+   $vms += Hyper-V\get-vm -ComputerName $node_name | 
+   ? {$_.Name -like $query } | 
+   Get-VMHardDiskDrive  | 
+   ? {$_.ControllerType -eq "SCSI" -and $_.Path.Contains("\\") } |
+   select VMName `
+   , @{ Name = 'HostName'; Expression = {$node_name}} `
+  , @{ Name = 'User';  Expression = { $string = $_.path.Replace("D-",";").split(";")[1].split(".")[0] ; (Get-ADUser -filter {sid -like $string} -Properties displayname).displayname }} `
+   ,@{ Name = 'UserProfileDisk'; Expression = {$_.Path.replace("C:\ClusterStorage\","")}} 
+ }
+
+$vms | sort UserProfileDisk | ft -AutoSize #

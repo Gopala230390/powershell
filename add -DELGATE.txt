@@ -1,0 +1,10 @@
+﻿$group = "RI-INDIA-FUN-AT-WORK@sapiens.com"
+
+$group1 = "RI_INDIA_FUN_AT_WORK"
+
+
+
+Import-CSV C:\temp\lala.csv | ForEach {Add-RecipientPermission  -Identity $group1 -AccessRights sendas -Trustee $_.Name -Confirm:$false}
+
+	
+Import-CSV C:\temp\lala.csv | ForEach {Add-DistributionGroupMember -Identity $group }

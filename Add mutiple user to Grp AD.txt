@@ -1,0 +1,12 @@
+
+# Adding the users Alan Rhodes, Flenn Parker and Mike Reyes to the group SG_PowerBi
+Add-ADGroupMember -Identity "SG_PowerBi" -Members arhodes, fparker, mreyes
+
+
+# Get all the users from the group Sales Management and add them to the group SG_PowerBi
+Get-ADGroupMember -Identity "Sales Management" | ForEach-Object { Add-ADGroupMember -Identity "SG_PowerBi" -Members $_ }
+
+Import-CSV c:\temp\mi.csv | ForEach {Add-ADGroupMember -Identity "WVD_NAPCIP_PB_Pool01" -Members $_.Name}
+
+
+https://lazyadmin.nl/powershell/add-user-to-group-add-adgroupmember/#:~:text=To%20add%20users%20to%20a,groups%20to%20an%20AD%20Group.

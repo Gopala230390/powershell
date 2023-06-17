@@ -1,0 +1,23 @@
+PowerShell Script for increasing the Mailbox Size :-
+----------------------------------------------------
+
+
+$Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
+
+Import-PSSession $Session -DisableNameChecking
+
+Get-Mailbox Username@sapiens.com | Select *quota
+
+Set-Mailbox Username@sapiens.com -ProhibitSendQuota 75GB -ProhibitSendReceiveQuota 75GB -IssueWarningQuota 75GB
+-----------------------------------------------------
+
+
+
+
+
+Run the below script in PowerShell for finding the User Disk number:-
+-------------------------------------------------
+get-aduser -filter { samaccountname -like "raghavendra.c"}
+
+
+

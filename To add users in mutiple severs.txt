@@ -1,0 +1,9 @@
+﻿
+For ($i=0; $i -le 12; $i++){ 
+$DomainName = "sapiens.int" 
+$ComputerName = Read-Host "Computer name:" 
+$UserName = Read-Host "user name:"
+$AdminGroup = [ADSI]"WinNT://$ComputerName/Remote Desktop Users,group" 
+$User = [ADSI]"WinNT://$DomainName/$UserName,user" 
+$AdminGroup.Add($User.Path) 
+} 
